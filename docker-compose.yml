@@ -26,6 +26,7 @@ services:
       MYSQL_DATABASE: redmine
   mail.example.com:
     image: "catatnight/postfix"
+    restart: always
     expose:
       - "25"
     environment:
