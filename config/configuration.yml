@@ -1,0 +1,13 @@
+default:
+  # Outgoing emails configuration (see examples above)
+  email_delivery:
+    delivery_method: :smtp
+    smtp_settings:
+      tls: false
+      address: mail.example.com
+      port: 25
+      domain: mail.example.com
+      authentication: :login
+      user_name: "user"
+      password: "pwd"
+      openssl_verify_mode: 'none'

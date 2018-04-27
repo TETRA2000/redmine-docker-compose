@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+
+  redmine:
+    image: redmine
+    restart: always
+    ports:
+      - 8080:3000
+    volumes:
+      - ./data:/usr/src/redmine/files
+      - ./config/configuration.yml:/usr/src/redmine/config/configuration.yml
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: example
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: redmine
+  mail.example.com:
+    image: "catatnight/postfix"
+    expose:
+      - "25"
+    environment:
+      - "maildomain=mail.example.com"
+      - "smtp_user=user:pwd"
